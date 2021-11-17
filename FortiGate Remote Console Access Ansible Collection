@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  collections:
+  - fortinetps.remote_console
+  vars:
+   term_server: "remote console server hostname or ip address"
+   term_user: "remote console server login username"
+   term_password: "remote console server login password"
+   term_ssh_port: "remote console server port which mapping to device(FortiGate) console port"
+   dev_user: "device(FortiGate) login username"
+   dev_password: "device(FortiGate) login password"
+  tasks:
+  - name: With remote console access, factory reset device (FortiGate)
+    fortigate_remote_console:
+      rcs_ip: "{{ term_server }}"
+      rcs_username: "{{ term_user }}"
+      rcs_password: "{{ term_password }}"
+      rcs_fgt_username: "{{ dev_user }}"
+      rcs_fgt_password: "{{ dev_password }}"
+      rcs_fgt_port: "{{ term_ssh_port }}"
+      rcs_fgt_action: "factoryreset"
